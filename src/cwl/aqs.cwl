@@ -96,6 +96,7 @@ steps:
       year: years
       aggregation: aggregation
       parameter_code: parameter_code
+      proxy: proxy
     out: [data]
 
   expand:
