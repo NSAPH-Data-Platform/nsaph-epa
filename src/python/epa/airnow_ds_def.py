@@ -107,6 +107,7 @@ class AirNowContext(Context):
                     required=False
     )
     _api_key = Argument("api_key",
+                        aliases=["api-key"],
                         help = "AirNow API Key",
                         required=False
     )
