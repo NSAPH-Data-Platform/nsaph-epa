@@ -130,6 +130,18 @@ steps:
       connection_name: connection_name
     out: [log]
 
+  vacuum:
+    run: vacuum.cwl
+    in:
+      depends_on: index/log
+      registry: introspect/model
+      domain:
+        valueFrom: "epa"
+      table: table
+      database: database
+      connection_name: connection_name
+    out: [log]
+
 
 outputs:
   shapes_data:
@@ -144,6 +156,9 @@ outputs:
   index_log:
     type: File
     outputSource: index/log
+  vacuum_log:
+    type: File
+    outputSource: vacuum/log
   download_data:
     type: File
     outputSource: download/data
