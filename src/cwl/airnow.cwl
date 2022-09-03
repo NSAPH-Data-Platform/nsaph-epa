@@ -37,6 +37,8 @@ doc: |
   cwl-runner airnow.cwl sample_airnow.yml
   ```
 
+  See [sample_airnow.yml](sample_airnow.md)
+
   Or
 
   ```shell
