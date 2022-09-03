@@ -34,7 +34,7 @@ doc: |
 
   Example run:
   ```shell
- cwl-runner airnow.cwl sample_airnow.yml
+  cwl-runner airnow.cwl sample_airnow.yml
   ```
 
   Or
