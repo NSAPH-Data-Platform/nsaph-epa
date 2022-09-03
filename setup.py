@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='epa',
-    version="0.0.1.3",
+    version="0.0.1.4",
     url='https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/tools/epa',
     license='',
     author='Michael Bouzinier',

@@ -178,7 +178,7 @@ class AirNowDownloader:
                 attempts += 1
                 if attempts < self.max_attempts:
                     logging.warning(str(x))
-                    time.sleep(self.time_to_sleep_between_attempts)
+                    time.sleep(self.time_to_sleep_between_attempts * attempts)
                     continue
                 raise
         return content
