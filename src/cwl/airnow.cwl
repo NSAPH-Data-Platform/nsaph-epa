@@ -33,12 +33,15 @@ doc: |
   and ingests the data into the database
 
   Example run:
-
-    cwl-runner airnow.cwl sample_airnow.yml
+  ```shell
+ cwl-runner airnow.cwl sample_airnow.yml
+  ```
 
   Or
 
-    cwl-runner --parallel /opt/airflow/project/epa/src/cwl/airnow.cwl --database /opt/airflow/project/database.ini --connection_name nsaph2 --proxy $HTTP_PROXY  --api-key XXXXXXXX-YYYY-ZZZZ-XXXX-YYYYYYYYY --from 2022-01-01 --to 2022-08-31 --parameter_code pm25 --table airnow_pm25_2022
+  ```shell
+  cwl-runner --parallel /opt/airflow/project/epa/src/cwl/airnow.cwl --database /opt/airflow/project/database.ini --connection_name nsaph2 --proxy $HTTP_PROXY  --api-key XXXXXXXX-YYYY-ZZZZ-XXXX-YYYYYYYYY --from 2022-01-01 --to 2022-08-31 --parameter_code pm25 --table airnow_pm25_2022
+  ```
 
 inputs:
   proxy:
