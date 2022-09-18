@@ -106,7 +106,7 @@ class AirNowDownloader:
         :param target: File name, where downloaded data is saved.
             If file name includes substring ".json", then the data is saved in
             JSON format, otherwise it is saved as CSV. If target is not
-            specified (None), then teh data is not saved to file but is
+            specified (None), then the data is not saved to file but is
             returned to the caller. The latter mode is useful for testing.
         :param parameter: Comma-separated list of parameters to download.
             In practice because of AirNow API limitations, if more than

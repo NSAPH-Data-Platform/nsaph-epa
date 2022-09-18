@@ -187,7 +187,7 @@ def collect_daily_downloads(destination: str, ylabel: str,
     list of years and EPA AQS parameters
 
     :param destination: Destination directory for downloads
-    :param ylabel: a label to use for years in teh destination path
+    :param ylabel: a label to use for years in the destination path
     :param contiguous_year_segment: a list of contiguous years taht can be
         saved in the same file
     :param parameters: List of EPA AQS Parameter codes
@@ -212,7 +212,7 @@ def collect_daily_downloads(destination: str, ylabel: str,
 
 def collect_aqs_download_tasks (context: AQSContext):
     """
-    Main entry into teh library
+    Main entry into the library
 
     :param aggregation: Type of time aggregation: annual or daily
     :param years: a list of years to include, if None - then all
