@@ -32,8 +32,20 @@ doc: |
   This workflow downloads AQS data from the government
   servers, introspects it to infer the database schema
   and ingests the data into the database
+
   Example run:
-  cwl-runner aqs.cwl sample_aqs.yml
+  ```shell
+  cwl-runner aqs.cwl sample_aqs_annual.yml
+  ```
+
+  See [sample_aqs_annual.yml](sample_aqs.md)
+
+  Or
+
+  ```shell
+  cwl-runner /opt/airflow/project/epa/src/cwl/aqs.cwl --database /opt/airflow/project/database.ini --connection_name nsaph2 --agregation annual --parameter_code PM25 --table pm25_annual --proxy $HTTP_PROXY
+  ```
+
 
 inputs:
   proxy:
