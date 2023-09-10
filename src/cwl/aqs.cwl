@@ -74,32 +74,15 @@ inputs:
     doc: Years to download
 
 steps:
-  states:
-    run: ensure_resource.cwl
-    doc: |
-      Ensures the presence of `us_states` table in the database.
-      The table contains mapping between state names, ids
-      (two letter abbreviations), FIPS codes and
-      [ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)
+  initdb:
+    run: initcoredb.cwl
+    doc: Ensure that database utilities are at their latest version
     in:
       database: database
       connection_name: connection_name
-      table:
-        valueFrom: "us_states"
-    out: [log]
-  iso:
-    run: ensure_resource.cwl
-    doc: |
-      Ensures the presence of `us_iso` table in the database.
-      The table provides a mapping between states, counties and zip
-      codes. It contains FIPS and
-      [ISO-3166-2 codes](https://en.wikipedia.org/wiki/ISO_3166-2)
-    in:
-      database: database
-      connection_name: connection_name
-      table:
-        valueFrom: "us_iso"
-    out: [log]
+    out:
+      - log
+      - err
 
   download:
     run: download_aqs.cwl
@@ -153,12 +136,9 @@ steps:
 
 
 outputs:
-  resource1_log:
+  initdb_log:
     type: File
-    outputSource: states/log
-  resource2_log:
-    type: File
-    outputSource: iso/log
+    outputSource: initdb/log
   expand_log:
     type: File
     outputSource: expand/log

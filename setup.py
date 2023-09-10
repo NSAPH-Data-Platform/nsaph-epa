@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name='epa',
-    version="0.0.1.4",
+    version="0.0.1.5",
     url='https://gitlab-int.rc.fas.harvard.edu/rse/francesca_dominici/tools/epa',
     license='',
     author='Michael Bouzinier',
@@ -28,7 +28,7 @@ setup(
         'geopandas',
         'numpy',
         'pandas',
-        'pygeos==0.10',
+        'pygeos',
         'pyshp',
         'requests',
         'PyYAML',

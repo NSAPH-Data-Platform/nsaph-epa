@@ -29,14 +29,14 @@ than AQS
 from datetime import datetime
 
 from epa.airnow_ds_def import AirNowContext
-from nsaph_gis.downloader import GISDownloader
+from nsaph_gis.downloader import GISDownloader, CensusShapeCollection
 
 
 def download_shapes():
     context = AirNowContext(__doc__)
 
     start = datetime.strptime(context.start_date, "%Y-%m-%d")
-    GISDownloader.download_shapes(start.year)
+    GISDownloader.download_shapes(year=start.year, source=CensusShapeCollection.tiger)
 
 
 if __name__ == '__main__':
