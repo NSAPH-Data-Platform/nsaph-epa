@@ -56,3 +56,7 @@ outputs:
     outputBinding:
       glob: "*.log"
 
+  errors:
+    type: stderr
+
+stderr: resource.err
