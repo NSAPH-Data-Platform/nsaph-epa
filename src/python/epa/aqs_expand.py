@@ -6,6 +6,7 @@ from typing import List, Optional
 from epa import PARAMETER_CODE, MONITOR, RECORD
 from epa.aqs_ds_def import Parameter
 from epa.aqs_tools import transfer
+from nsaph import init_logging
 from nsaph_utils.utils.io_utils import fopen, file_as_csv_reader
 
 log = logging.getLogger(__name__)
@@ -40,6 +41,7 @@ def expand_data(files: List[str], parameter: Optional[int]) -> str:
 
 
 if __name__ == '__main__':
+    init_logging()
     ap = argparse.ArgumentParser()
     ap.add_argument("--parameter_code", dest="parameter", type=str, required=False, help="Parameter")
     ap.add_argument('files', type=str, nargs='+', help='files to parse')

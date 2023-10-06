@@ -116,6 +116,8 @@ steps:
     doc: Uploads data into the database
     in:
       registry: introspect/model
+      domain:
+        valueFrom: "epa"
       table: table
       input: expand/data
       database: database
@@ -132,7 +134,19 @@ steps:
       table: table
       database: database
       connection_name: connection_name
-    out: [log]
+    out: [log, errors]
+
+  vacuum:
+    run: vacuum.cwl
+    in:
+      depends_on: index/log
+      registry: introspect/model
+      domain:
+        valueFrom: "epa"
+      table: table
+      database: database
+      connection_name: connection_name
+    out: [log, errors]
 
 
 outputs:
@@ -151,6 +165,9 @@ outputs:
   index_log:
     type: File
     outputSource: index/log
+  vacuum_log:
+    type: File
+    outputSource: vacuum/log
   data:
     type: File
     outputSource: expand/data
@@ -163,3 +180,9 @@ outputs:
   ingest_err:
     type: File
     outputSource: ingest/errors
+  index_err:
+    type: File
+    outputSource: index/errors
+  vacuum_err:
+    type: File
+    outputSource: vacuum/errors

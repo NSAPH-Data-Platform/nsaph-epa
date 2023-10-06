@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-### Uploader of the EPA Data to the database
+### Universal uploader of the tabular data to the database
 #  Copyright (c) 2021. Harvard University
 #
 #  Developed by Research Software Engineering,
@@ -22,9 +22,12 @@
 cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: [python, -m, nsaph.loader.data_loader]
+# baseCommand: echo
+requirements:
+  InlineJavascriptRequirement: {}
 
 doc: |
-  This tool uploads the data to the database
+  This tool ingests tabular data, usually in CSV format into the database
 
 
 inputs:
@@ -49,12 +52,21 @@ inputs:
     doc: The name of the section in the database.ini file
     inputBinding:
       prefix: --connection
+  domain:
+    type: string
+    inputBinding:
+      prefix: --domain
   input:
     type: File
     inputBinding:
       prefix: --data
     doc: |
-      A path the downloaded data file
+      A path the downloaded data files
+  pattern:
+    type: string
+    default: "*.csv*"
+    inputBinding:
+      prefix: --pattern
   threads:
     type: int
     default: 4
@@ -73,21 +85,18 @@ inputs:
       if specified, the process will stop after ingesting
       the specified number of records
   depends_on:
-    type: File?
+    type: Any?
     doc: a special field used to enforce dependencies and execution order
 
 arguments:
     - valueFrom: "--reset"
-    - valueFrom: "epa"
-      prefix: --domain
 
 outputs:
   log:
-    type: File
+    type: File?
     outputBinding:
       glob: "*.log"
   errors:
     type: stderr
 
-stderr: ingest.err
-
+stderr:  $("ingest-" + inputs.table + ".err")
