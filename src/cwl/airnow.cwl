@@ -74,22 +74,26 @@ inputs:
   table:
     doc: Name of the table to be created in the database
     type: string
+  year:
+    type: int
 
 steps:
   get_shapes:
     run: get_shapes.cwl
     in:
-      from: from
-      to: to
-      parameter_code: parameter_code
+      year:
+        valueFrom: $(String(inputs.yy))
+      yy: year
+      geo:
+        valueFrom: "all"
       proxy: proxy
-    out: [shapes]
+    out: [shape_files]
 
   download:
     run: download_airnow.cwl
     in:
       api-key: api-key
-      shapes: get_shapes/shapes
+      shapes: get_shapes/shape_files
       from: from
       to: to
       table: table
@@ -112,6 +116,8 @@ steps:
     doc: Uploads data into the database
     in:
       registry: introspect/model
+      domain:
+        valueFrom: "epa"
       table: table
       input: download/data
       database: database
@@ -146,7 +152,7 @@ steps:
 outputs:
   shapes_data:
     type: File[]
-    outputSource: get_shapes/shapes
+    outputSource: get_shapes/shape_files
   download_log:
     type: File
     outputSource: download/log

@@ -1,10 +1,10 @@
 #!/usr/bin/env cwl-runner
-### Tool retrieving county or zip shapefiles from Census website
+### Downloader of AirNow Data
 #  Copyright (c) 2021. Harvard University
 #
 #  Developed by Research Software Engineering,
 #  Faculty of Arts and Sciences, Research Computing (FAS RC)
-#  Author: Michael A Bouzinier
+#  Author: Quantori LLC
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -21,43 +21,47 @@
 
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: [python, -m, epa.airnow_shapes]
+baseCommand: [python, -m, nsaph_gis.shapes_downloader]
+
 requirements:
-  InlineJavascriptRequirement: {}
+  ResourceRequirement:
+    coresMin: 1
   EnvVarRequirement:
     envDef:
-      HTTPS_PROXY: $(inputs.proxy)
-      HTTP_PROXY: $(inputs.proxy)
+      HTTP_PROXY: "$('proxy' in inputs? inputs.proxy: null)"
+      HTTPS_PROXY: "$('proxy' in inputs? inputs.proxy: null)"
+      NO_PROXY: "localhost,127.0.0.1,172.17.0.1"
+
 
 doc: |
-  This tool downloads AirNow data from EPA website
+  This tool downloads Shape files from US Census website
 
 inputs:
   proxy:
     type: string?
     default: ""
     doc: HTTP/HTTPS Proxy if required
-  parameter_code:
+  year:
     type: string
+    doc: Calendar year, for which we are downloading shape file
+    inputBinding:
+      prefix: --year
+  geo:
+    type: string
+    doc: geography type, zip, zcta or county
+    inputBinding:
+      prefix: --geography
+  collection:
+    type: string
+    default: tiger
     doc: |
-      Parameter code. Either a numeric code (e.g. 88101, 44201)
-      or symbolic name (e.g. PM25, NO2).
-      See more: [AQS Code List](https://www.epa.gov/aqs/aqs-code-list)
+      [Collection of shapefiles](https://www2.census.gov/geo/tiger), 
+      either GENZ or TIGER
     inputBinding:
-      prefix: --parameters
-  from:
-    type: string
-    doc: Start date for downolading, in YYYY-MM-DD format
-    inputBinding:
-      prefix: --from
-  to:
-    type: string
-    doc: End date for downolading, in YYYY-MM-DD format
-    inputBinding:
-      prefix: --to
+      prefix: --collection
 
 outputs:
-  shapes:
+  shape_files:
     type: File[]
     outputBinding:
       glob: "*.shp"
