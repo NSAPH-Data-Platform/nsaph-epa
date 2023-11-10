@@ -9,5 +9,5 @@ years:
   - "2010"
   - "2011"
 test_script:
-  path: /opt/local/tests/aqs_test.sql
+  path: /opt/local/pipelines/test_cases/aqs_test.sql
   class: File
