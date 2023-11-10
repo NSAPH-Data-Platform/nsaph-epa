@@ -4,7 +4,7 @@ database:
 connection_name:  dorieh
 table:            airnow_pm25_2022
 parameter_code:   pm25
-year:             "2022"
+year:             2022
 api-key:          9B053C38-3C42-416E-A330-203A698CCCDA
 from:             2022-01-01
 to:               2022-08-31
